@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <!--表示这个文件严格按照mybatis-3-mapper.dtd里的规范来命名标签 -->
+<mapper namespace="com.hongqisi.dao.AreaDao">
+    <select id="queryArea" resultType="com.hongqisi.entity.Area">
+        select area_id,area_name,priority,create_time,last_edit_time
+        from tb_area order by priority desc
+    </select>
+</mapper>
