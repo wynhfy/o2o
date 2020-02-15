@@ -10,6 +10,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -43,15 +44,15 @@ public class ImageUtil {
 
     /**
      * 处理用户传送过来的对象，处理缩略图并生成图片的相对路径
-     * @param thumbnail  spring自带的文件处理对象，转换成了File
+     * @param thumbnailInputStream  spring自带的文件处理对象，转换成了File
      * @param targetAddr 图片的目标存储路径
      * @return
      */
-    public static String generateThumbnail(File thumbnail,String targetAddr){
+    public static String generateThumbnail(InputStream thumbnailInputStream,String filename, String targetAddr){
         //由于用户传过来的图片很容易重名，所以要编写一个随机名字
         String realFileName=getRandomFileName();
         //获取图片扩展名
-        String extension=getFileExtension(thumbnail);
+        String extension=getFileExtension(filename);
         makeDirPath(targetAddr);
         String relativeAddr=targetAddr+realFileName+extension; //得到相对路径
         logger.debug("current relativeAddr is:"+relativeAddr);
@@ -59,8 +60,9 @@ public class ImageUtil {
         logger.debug("current completeAddr is:"+PathUtil.getImgBasePath()+relativeAddr);
         //生成缩略图
         try{
-            Thumbnails.of(thumbnail).size(200,200)
-                    .watermark(Positions.BOTTOM_RIGHT,ImageIO.read(new File(basepath+"/watermark.jpg")),0.25f)
+            //System.out.println(basepath);
+            Thumbnails.of(thumbnailInputStream).size(200,200)
+                    .watermark(Positions.BOTTOM_RIGHT,ImageIO.read(new File(basepath+"watermark.jpg")),0.25f)
                     .outputQuality(0.8f).toFile(dest);
         } catch (IOException e) {
             logger.error(e.toString());
@@ -86,7 +88,7 @@ public class ImageUtil {
      * 生成随机文件名，当前年月日小时分钟秒数+五位随机数
      * @return
      */
-    private static String getRandomFileName(){
+    public static String getRandomFileName(){
         //获取随机五位数
         int rannum=r.nextInt(89999)+10000;
         String nowtimestr=sdf.format(new Date());
@@ -95,12 +97,11 @@ public class ImageUtil {
 
     /**
      * 获取输入文件流的扩展名
-     * @param cfile
+     * @param filename
      * @return
      */
-    private static String getFileExtension(File cfile){
-        String originalFileName=cfile.getName();
-        return originalFileName.substring(originalFileName.lastIndexOf("."));
+    private static String getFileExtension(String filename){
+        return filename.substring(filename.lastIndexOf("."));
     }
 
 
