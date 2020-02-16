@@ -105,6 +105,26 @@ public class ImageUtil {
     }
 
 
+    /**
+     * storePath是文件的路径或者目录的路径
+     * 如果storePath是文件路径，则删除该文件
+     * 如果storePath是目录路径，则删除该目录下的所有文件
+     * @param storePath
+     */
+    public static void deleteFileOrPath(String storePath){
+         File file=new File(PathUtil.getImgBasePath()+storePath);
+         if(file.exists()){
+             if(file.isDirectory()){
+                 File[] files=file.listFiles();
+                 for(int i=0;i<files.length;i++) {
+                     files[i].delete();
+                 }
+             }
+             file.delete();
+         }
+    }
+
+
     public static void main(String[] args) throws IOException {
         String basepath=Thread.currentThread().getContextClassLoader().getResource("").getPath();
         Thumbnails.of(new File("/Users/ynwu/Pictures/qiaoba.jpg")).size(200,200)

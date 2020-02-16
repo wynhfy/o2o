@@ -12,6 +12,7 @@ public class PathUtil {
      * @return
      */
     public static String getImgBasePath(){
+        //得到系统名，判断是什么系统
         String os=System.getProperty("os.name");
         String basepath="";
         if(os.toLowerCase().startsWith("win")){

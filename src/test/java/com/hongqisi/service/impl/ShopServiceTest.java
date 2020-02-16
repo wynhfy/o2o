@@ -8,6 +8,7 @@ import com.hongqisi.entity.Shop;
 import com.hongqisi.entity.ShopCategory;
 import com.hongqisi.enums.ShopStateEnum;
 import com.hongqisi.service.ShopService;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,13 +18,41 @@ import java.io.InputStream;
 import java.util.Date;
 import java.io.File;
 import static org.junit.Assert.*;
+import java.util.List;
 
 public class ShopServiceTest extends BaseTest {
 
     @Autowired
     private ShopService shopService;
 
+
     @Test
+    public void testQueryShopListAndCount(){
+        Shop shopCondition=new Shop();
+        ShopCategory shopCategory=new ShopCategory();
+        shopCategory.setShopCategoryId(2L);
+        shopCondition.setShopCategory(shopCategory);
+        ShopExecution  se=shopService.getShopList(shopCondition,2,3);
+        List<Shop> shopList=se.getShopList();
+        int count=se.getCount();
+        System.out.println(shopList.size());
+        System.out.println(count);
+    }
+
+    @Test
+    @Ignore
+    public void testModifyShop() throws FileNotFoundException {
+        Shop shop=new Shop();
+        shop.setShopId(12L);
+        shop.setPhone("17306692310");
+        File file=new File("/Users/ynwu/Pictures/qiaoba.jpg");
+        InputStream is=new FileInputStream(file);
+        ShopExecution shopExecution=shopService.modifyShop(shop,is,"qiaoba.jpg");
+        System.out.println("新的图片地址为："+shopExecution.getShop().getShopImg());
+    }
+
+    @Test
+    @Ignore
     public void addShopTest() throws FileNotFoundException {
         Shop shop=new Shop();
         PersonInfo owner=new PersonInfo();
