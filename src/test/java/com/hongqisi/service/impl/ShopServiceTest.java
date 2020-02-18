@@ -1,6 +1,7 @@
 package com.hongqisi.service.impl;
 
 import com.hongqisi.BaseTest;
+import com.hongqisi.dto.ImageHolder;
 import com.hongqisi.dto.ShopExecution;
 import com.hongqisi.entity.Area;
 import com.hongqisi.entity.PersonInfo;
@@ -47,7 +48,8 @@ public class ShopServiceTest extends BaseTest {
         shop.setPhone("17306692310");
         File file=new File("/Users/ynwu/Pictures/qiaoba.jpg");
         InputStream is=new FileInputStream(file);
-        ShopExecution shopExecution=shopService.modifyShop(shop,is,"qiaoba.jpg");
+        ImageHolder imageHolder=new ImageHolder(file.getName(),is);
+        ShopExecution shopExecution=shopService.modifyShop(shop,imageHolder);
         System.out.println("新的图片地址为："+shopExecution.getShop().getShopImg());
     }
 
@@ -73,7 +75,8 @@ public class ShopServiceTest extends BaseTest {
         shop.setAdvice("审核中");
         File shopImg=new File("/Users/ynwu/pictures/qiaoba.jpg");
         InputStream is=new FileInputStream(shopImg);
-        ShopExecution se=shopService.addShop(shop,is,shopImg.getName());
+        ImageHolder imageHolder=new ImageHolder(shopImg.getName(),is);
+        ShopExecution se=shopService.addShop(shop,imageHolder);
         assertEquals(ShopStateEnum.CHECK.getState(),se.getState());
     }
 

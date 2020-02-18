@@ -1,4 +1,4 @@
-package com.hongqisi.web.shopadmin;
+package com.hongqisi.web.shop;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,4 +23,15 @@ public class ShopController {
     public String shopManageMent(){
         return "shop/shopmanagement";
     }
+
+    @RequestMapping("/productcategorymanagement")
+    public String productCategoryManagement(){
+        return "shop/productcategorymanagement";
+    }
+
+    @RequestMapping("/productoperation")
+    public String productOperation(){
+        return "shop/productoperation";
+    }
+
 }

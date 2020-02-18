@@ -1,5 +1,6 @@
 package com.hongqisi.util;
 
+import com.hongqisi.dto.ImageHolder;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Position;
 import net.coobird.thumbnailator.geometry.Positions;
@@ -8,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,15 +46,15 @@ public class ImageUtil {
 
     /**
      * 处理用户传送过来的对象，处理缩略图并生成图片的相对路径
-     * @param thumbnailInputStream  spring自带的文件处理对象，转换成了File
+     * @param thumbnail  spring自带的文件处理对象，转换成了File
      * @param targetAddr 图片的目标存储路径
      * @return
      */
-    public static String generateThumbnail(InputStream thumbnailInputStream,String filename, String targetAddr){
+    public static String generateThumbnail(ImageHolder thumbnail, String targetAddr){
         //由于用户传过来的图片很容易重名，所以要编写一个随机名字
         String realFileName=getRandomFileName();
         //获取图片扩展名
-        String extension=getFileExtension(filename);
+        String extension=getFileExtension(thumbnail.getImageName());
         makeDirPath(targetAddr);
         String relativeAddr=targetAddr+realFileName+extension; //得到相对路径
         logger.debug("current relativeAddr is:"+relativeAddr);
@@ -61,11 +63,33 @@ public class ImageUtil {
         //生成缩略图
         try{
             //System.out.println(basepath);
-            Thumbnails.of(thumbnailInputStream).size(200,200)
+            Thumbnails.of(thumbnail.getImage()).size(200,200)
                     .watermark(Positions.BOTTOM_RIGHT,ImageIO.read(new File(basepath+"watermark.jpg")),0.25f)
                     .outputQuality(0.8f).toFile(dest);
         } catch (IOException e) {
             logger.error(e.toString());
+            e.printStackTrace();
+        }
+        return relativeAddr;
+    }
+
+    /**
+     * 处理商品详情图
+     * @param thumbnail
+     * @param targetAddr
+     * @return
+     */
+    public static String generateNormalImg(ImageHolder thumbnail,String targetAddr){
+        String realFileName=ImageUtil.getRandomFileName();
+        String extension= ImageUtil.getFileExtension(thumbnail.getImageName());
+        makeDirPath(targetAddr);
+        String relativeAddr=targetAddr+realFileName+extension;
+        File dest=new File(PathUtil.getImgBasePath()+relativeAddr);
+        try{
+            Thumbnails.of(thumbnail.getImage()).size(337,640)
+                    .watermark(Positions.BOTTOM_RIGHT,ImageIO.read(new File(basepath+"watermark.jpg")),0.25f)
+                    .outputQuality(0.9f).toFile(dest);
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return relativeAddr;
