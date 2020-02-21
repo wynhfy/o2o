@@ -15,4 +15,13 @@
             )
         </foreach>
     </insert>
+
+    <delete id="deleteProductImgByProductId">
+        delete from tb_product_img where product_id=#{productId}
+    </delete>
+
+    <select id="queryProductImgList" parameterType="long" resultType="com.hongqisi.entity.ProductImg">
+        select  product_img_id,img_addr,img_desc,priority,create_time,product_id from tb_product_img
+        where product_id=#{productId}
+    </select>
 </mapper>

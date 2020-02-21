@@ -20,21 +20,24 @@ public class ShopDaoTest extends BaseTest {
 
     @Test
     public void testQueryShopList(){
-        PersonInfo owner =new PersonInfo();
-        owner.setUserId(1L);
+//        PersonInfo owner =new PersonInfo();
+//        owner.setUserId(1L);
         Shop shopCondition=new Shop();
-        shopCondition.setOwner(owner);
+        //shopCondition.setOwner(owner);
+        Area area=new Area();
+        area.setAreaId(1);
+        shopCondition.setArea(area);
         List<Shop> shopList=shopDao.queryShopList(shopCondition,0,5);
         int count=shopDao.queryShopCount(shopCondition);
         System.out.println(shopList.size());
         System.out.println(count);
-        ShopCategory shopCategory=new ShopCategory();
-        shopCategory.setShopCategoryId(2L);
-        shopCondition.setShopCategory(shopCategory);
-        shopList=shopDao.queryShopList(shopCondition,0,3);
-        System.out.println(shopList.size());
-        count=shopDao.queryShopCount(shopCondition);
-        System.out.println(count);
+//        ShopCategory shopCategory=new ShopCategory();
+//        shopCategory.setShopCategoryId(2L);
+//        shopCondition.setShopCategory(shopCategory);
+//        shopList=shopDao.queryShopList(shopCondition,0,3);
+//        System.out.println(shopList.size());
+//        count=shopDao.queryShopCount(shopCondition);
+//        System.out.println(count);
     }
 
     @Test
@@ -80,6 +83,19 @@ public class ShopDaoTest extends BaseTest {
         shop.setLastEditTime(new Date());
         int effectedNum=shopDao.updateShop(shop);
         assertEquals(1,effectedNum);
+    }
+
+    @Test
+    @Ignore
+    public void testQueryShop(){
+        ShopCategory parent=new ShopCategory();
+        parent.setShopCategoryId(1L);
+        ShopCategory child=new ShopCategory();
+        child.setParent(parent);
+        Shop shop=new Shop();
+        shop.setShopCategory(child);
+        List<Shop> shops=shopDao.queryShopList(shop,0,4);
+        assertEquals(1,shops.size());
     }
 
 }

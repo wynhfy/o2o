@@ -11,7 +11,7 @@ $(function () {
 
      }else{
          getShopInfo(shopId);
-     }
+     }1
      //编辑shop的方法
     function getShopInfo(shopId) {
         $.getJSON(shopInfoUrl,function (data){

@@ -21,4 +21,26 @@ public interface ProductService {
     public ProductExecution addShop(Product product, ImageHolder imageHolder,List<ImageHolder> imageHolderList)
         throws ProductOperationException;
 
+    /**
+     * 通过商品ID查询商品信息
+     * @param productId
+     * @return
+     */
+    public Product getProductById(Long productId);
+
+    /**
+     * 修改商品信息以及图片处理
+     * @param product
+     * @param thumbnail
+     * @param productImgHolderList
+     * @return
+     * @throws ProductOperationException
+     */
+    public ProductExecution modifyProduct(Product product,ImageHolder thumbnail,List<ImageHolder> productImgHolderList)throws ProductOperationException;
+
+
+    public ProductExecution getProductList(Product productCondition,int pageIndex,int pageSize);
+
+
+
 }

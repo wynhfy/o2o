@@ -70,6 +70,7 @@ public class ShopManagementController {
     @ResponseBody
     public Map<String,Object> getShopList(HttpServletRequest request){
         Map<String,Object> modelMap=new HashMap<>();
+        // todo 应该由session来做
         PersonInfo user=new PersonInfo();
         user.setUserId(1L);
         user.setName("洪起司");
@@ -246,7 +247,7 @@ public class ShopManagementController {
             ShopExecution se= null;
             try {
                 ImageHolder imageHolder=new ImageHolder(shopImg.getOriginalFilename(),shopImg.getInputStream());
-                se = shopService.addShop(shop,imageHolder);
+                    se = shopService.addShop(shop,imageHolder);
                 if(se.getState()== ShopStateEnum.CHECK.getState()){
                     modelMap.put("success",true);
                     //该用户可以操作的店铺列表
