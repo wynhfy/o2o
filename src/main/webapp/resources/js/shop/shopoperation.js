@@ -1,10 +1,10 @@
 $(function () {
      var shopId=getQueryString("shopId");
      var isEdit=shopId?true:false; //非空返回true,空的返回false
-     var initUrl ='/shop/getshopinitinfo';
-     var registerShopUrl='/shop/registershop';
-     var shopInfoUrl='/shop/getshopbyid?shopId='+shopId;
-     var editShopUrl='/shop/modifyshop';
+     var initUrl ='/o2o/shop/getshopinitinfo';
+     var registerShopUrl='/o2o/shop/registershop';
+     var shopInfoUrl='/o2o/shop/getshopbyid?shopId='+shopId;
+     var editShopUrl='/o2o/shop/modifyshop';
      //alert(initUrl);
      if(!isEdit){
          getShopInitInfo();

@@ -2,11 +2,11 @@ $(function() {
 	// 从URL里获取productId参数的值
 	var productId = getQueryString('productId');
 	// 通过productId获取商品信息的URL
-	var infoUrl = '/shop/getproductbyid?productId=' + productId;
+	var infoUrl = '/o2o/shop/getproductbyid?productId=' + productId;
 	// 获取当前店铺设定的商品类别列表的URL
-	var categoryUrl = '/shop/getproductcategorylist';
+	var categoryUrl = '/o2o/shop/getproductcategorylist';
 	// 更新商品信息的URL
-	var productPostUrl = '/shop/modifyproduct';
+	var productPostUrl = '/o2o/shop/modifyproduct';
 	// 由于商品添加和编辑使用的是同一个页面，
 	// 该标识符用来标明本次是添加还是编辑操作
 	var isEdit = false;
@@ -16,7 +16,7 @@ $(function() {
 		isEdit = true;
 	} else {
 		getCategory();
-		productPostUrl = '/shop/addproduct';
+		productPostUrl = '/o2o/shop/addproduct';
 	}
 
 	// 获取需要编辑的商品的商品信息，并赋值给表单
