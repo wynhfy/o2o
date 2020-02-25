@@ -91,4 +91,19 @@ public class PersonInfo {
     public void setLastEditTime(Date lastEditTime) {
         this.lastEditTime = lastEditTime;
     }
+
+    @Override
+    public String toString() {
+        return "PersonInfo{" +
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                ", profileImg='" + profileImg + '\'' +
+                ", email='" + email + '\'' +
+                ", gender='" + gender + '\'' +
+                ", enableStatus=" + enableStatus +
+                ", userType=" + userType +
+                ", createTime=" + createTime +
+                ", lastEditTime=" + lastEditTime +
+                '}';
+    }
 }

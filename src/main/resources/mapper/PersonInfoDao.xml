@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <!--表示这个文件严格按照mybatis-3-mapper.dtd里的规范来命名标签 -->
+<mapper namespace="com.hongqisi.dao.PersonInfoDao">
+    <select id="queryPersonInfoById" parameterType="Long" resultType="com.hongqisi.entity.PersonInfo">
+        select user_id,name,profile_img,email,gender,enable_status,user_type,create_time,last_edit_time from tb_person_info
+        where user_id=#{userId}
+    </select>
+    <insert id="insertPersonInfo" parameterType="com.hongqisi.entity.PersonInfo" useGeneratedKeys="true" keyProperty="userId" keyColumn="user_id">
+        insert into tb_person_info(name,profile_img,email,gender,enable_status,user_type,create_time,last_edit_time)
+        values (#{name},#{profileImg},#{email},#{gender},#{enableStatus},#{userType},#{createTime},#{lastEditTime})
+    </insert>
+</mapper>

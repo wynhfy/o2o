@@ -9,7 +9,7 @@ public class WechatAuth {
 
     private Long wechatAuthId;
     private String openId;
-    private Date createtime;
+    private Date createTime;
     private PersonInfo personInfo;
 
     public Long getWechatAuthId() {
@@ -29,11 +29,11 @@ public class WechatAuth {
     }
 
     public Date getCreatetime() {
-        return createtime;
+        return createTime;
     }
 
     public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+        this.createTime = createtime;
     }
 
     public PersonInfo getPersonInfo() {
@@ -42,5 +42,15 @@ public class WechatAuth {
 
     public void setPersonInfo(PersonInfo personInfo) {
         this.personInfo = personInfo;
+    }
+
+    @Override
+    public String toString() {
+        return "WechatAuth{" +
+                "wechatAuthId=" + wechatAuthId +
+                ", openId='" + openId + '\'' +
+                ", createTime=" + createTime +
+                ", personInfo=" + personInfo +
+                '}';
     }
 }

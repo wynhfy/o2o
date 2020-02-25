@@ -1,4 +1,4 @@
 package com.hongqisi.util;
 
-public class SignUtil {
+public class DESUtil {
 }
