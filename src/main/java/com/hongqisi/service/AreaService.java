@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public interface AreaService {
 
+     public static final String AREALISTKEY="arealist";
+
      public List<Area> getAreaList();
 
 }
