@@ -12,5 +12,4 @@ public interface ShopCategoryService {
 
     public List<ShopCategory> getShopCategoryList(ShopCategory shopCategoryCondition);
 
-
 }

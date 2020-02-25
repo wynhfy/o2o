@@ -37,6 +37,7 @@ public class ShopCategoryServiceImpl implements ShopCategoryService {
 
 
     @Override
+    @Transactional
     public List<ShopCategory> getShopCategoryList(ShopCategory shopCategoryCondition) {
         List<ShopCategory> list=null;
         String key=SCLISTKEY;;
