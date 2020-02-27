@@ -10,7 +10,7 @@ public class LocalAuth {
     private Long localAuthId;
     private String username;
     private String password;
-    private Date createtime;
+    private Date createTime;
     private Date lastEditTime;
     private PersonInfo personInfo;
 
@@ -39,11 +39,11 @@ public class LocalAuth {
     }
 
     public Date getCreatetime() {
-        return createtime;
+        return createTime;
     }
 
     public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+        this.createTime = createtime;
     }
 
     public Date getLastEditTime() {
