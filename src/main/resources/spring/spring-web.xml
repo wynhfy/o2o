@@ -35,4 +35,31 @@
     <!-- 4.扫描web相关的bean -->
     <context:component-scan base-package="com.hongqisi.web" />
 
+    <!--权限拦截器-->
+    <mvc:interceptors>
+        <!--检验是否已登陆了店家管理系统的拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/shop/**"/>
+            <bean id="ShopInterceptor" class="com.hongqisi.interceptor.shop.ShopLoginInterceptor"/>
+        </mvc:interceptor>
+        <!--检验是否对该店铺有操作权限的拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/shop/**"/>
+            <!--shoplist page-->
+            <!--将shopList存入session中-->
+            <mvc:exclude-mapping path="/shop/shoplist"/>
+            <mvc:exclude-mapping path="/shop/getshoplist"/>
+            <!--shopregister page-->
+            <!--将shopList存入session中-->
+            <mvc:exclude-mapping path="/shop/getshopinitinfo"/>
+            <mvc:exclude-mapping path="/shop/registershop"/>
+            <mvc:exclude-mapping path="/shop/shopoperation"/>
+            <!--shopmanagee page-->
+            <!--将currentShop存入session中-->
+            <mvc:exclude-mapping path="/shop/shopmanagement"/>
+            <mvc:exclude-mapping path="/shop/getshopmanagementinfo"/>
+            <bean id="ShopPermissionInterceptor" class="com.hongqisi.interceptor.shop.ShopPermissionInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 </beans>

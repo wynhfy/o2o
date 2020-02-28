@@ -10,7 +10,7 @@
         <result property="createTime" column="create_time"/>
         <result property="lastEditTime" column="last_edit_time"/>
         <association property="personInfo" column="user_id" javaType="com.hongqisi.entity.PersonInfo">
-            <id property="user_id" column="userId"/>
+            <id property="userId" column="user_id"/>
             <result property="name" column="name"/>
             <result property="gender" column="gender"/>
             <result property="email" column="email"/>
