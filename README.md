@@ -4,4 +4,4 @@
 - 实现技术
   - 前端  js、css、html
   - 后端  spring+springmvc+mybatis
-平台：IDEA
+- 平台：IDEA
